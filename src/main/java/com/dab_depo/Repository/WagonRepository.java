@@ -15,12 +15,13 @@ import java.util.List;
 public class WagonRepository implements IWagonRepository {
 
     private List<Wagon> wagons = new ArrayList<>();
+    String FILE_PATH = "src/main/resources/XMLfiles/data.xml";
 
     public WagonRepository() {
         try {
             // Parse data from XML file using JacksonXML
             XmlMapper xmlMapper = new XmlMapper();
-            wagons = xmlMapper.readValue(new File("src/main/resources/XMLfiles/data.xml"), new TypeReference<List<Wagon>>() {});
+            wagons = xmlMapper.readValue(new File(FILE_PATH), new TypeReference<List<Wagon>>() {});
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,7 +69,7 @@ public class WagonRepository implements IWagonRepository {
     private void saveData() {
         try {
             XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.writeValue(new File("data.xml"), wagons);
+            xmlMapper.writeValue(new File(FILE_PATH), wagons);
         } catch (IOException e) {
             e.printStackTrace();
         }

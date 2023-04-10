@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <title>Wagons List</title>
 </head>
+
+<!-- HEADER -->
+<header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/wagons">Wagons</a>
+        <a href="#">About us</a>
+    </nav>
+</header>
+
 <body>
 <h1>Wagons List</h1>
 <table>
@@ -27,6 +37,10 @@
         <td th:text="${wagon.homeStation}"></td>
         <td th:text="${wagon.loadCapacity}"></td>
         <td th:text="${wagon.yearOfRelease}"></td>
+        <td>
+            <a th:href="@{/edit/{wagonId} (wagonId =${wagon.getId()})}">✏️</a>
+            <a th:href="@{/delete/{wagonId} (wagonId =${wagon.getId()})}">❌</a>
+        </td>
     </tr>
     </tbody>
 </table>

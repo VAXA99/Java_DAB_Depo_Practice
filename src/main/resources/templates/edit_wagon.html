@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wagons List</title>
+</head>
+
+<!-- HEADER -->
+<header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/wagons">Wagons</a>
+        <a href="#">About us</a>
+    </nav>
+</header>
+
+<body>
+<h1>Wagons List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Loading Percentage</th>
+        <th>Serial Number</th>
+        <th>Home Station</th>
+        <th>Load Capacity</th>
+        <th>Year of Release</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="wagon: ${wagon}">
+        <form th:action="/edit" method="post">
+            <td th:text="${wagon.getId}"></td>
+            <td><input th:value="${wagon.getWagonType}" type="text"></td>
+            <td><input th:value="${wagon.getLoadingPercentage}" type="number"></td>
+            <td><input th:value="${wagon.getSerialNumber}" type="number"></td>
+            <td><input th:value="${wagon.getHomeStation}" type="text"></td>
+            <td><input th:value="${wagon.getLoadCapacity}" type="number"></td>
+            <td><input th:value="${wagon.getYearOfRelease()}" type="number" ></td>
+            <td>
+                <button type="submit">✅</button>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
