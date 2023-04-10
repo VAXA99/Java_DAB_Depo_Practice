@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wagons>
+    <wagon>
+        <id>1</id>
+        <wagon_type>Boxcar</wagon_type>
+        <loading_percentage>80</loading_percentage>
+        <serial_number>12345</serial_number>
+        <home_station>New York</home_station>
+        <load_capacity>50000</load_capacity>
+        <year_of_release>2010</year_of_release>
+    </wagon>
+    <wagon>
+        <id>2</id>
+        <wagon_type>Tank Car</wagon_type>
+        <loading_percentage>70</loading_percentage>
+        <serial_number>67890</serial_number>
+        <home_station>Los Angeles</home_station>
+        <load_capacity>80000</load_capacity>
+        <year_of_release>2008</year_of_release>
+    </wagon>
+    <wagon>
+        <id>3</id>
+        <wagon_type>Hopper Car</wagon_type>
+        <loading_percentage>90</loading_percentage>
+        <serial_number>24680</serial_number>
+        <home_station>Chicago</home_station>
+        <load_capacity>60000</load_capacity>
+        <year_of_release>2015</year_of_release>
+    </wagon>
+</wagons>

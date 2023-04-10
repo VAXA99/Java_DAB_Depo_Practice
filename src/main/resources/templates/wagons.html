@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wagons List</title>
+</head>
+<body>
+<h1>Wagons List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Loading Percentage</th>
+        <th>Serial Number</th>
+        <th>Home Station</th>
+        <th>Load Capacity</th>
+        <th>Year of Release</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="wagon : ${wagons}">
+        <td th:text="${wagon.id}"></td>
+        <td th:text="${wagon.wagonType}"></td>
+        <td th:text="${wagon.loadingPercentage}"></td>
+        <td th:text="${wagon.serialNumber}"></td>
+        <td th:text="${wagon.homeStation}"></td>
+        <td th:text="${wagon.loadCapacity}"></td>
+        <td th:text="${wagon.yearOfRelease}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
