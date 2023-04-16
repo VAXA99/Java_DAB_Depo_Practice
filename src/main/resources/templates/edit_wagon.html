@@ -26,18 +26,19 @@
         <th>Home Station</th>
         <th>Load Capacity</th>
         <th>Year of Release</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="wagon: ${wagon}">
-        <form th:action="/edit" method="post">
+        <form th:action="'/edit/' + ${wagon.getId}" method="post">
             <td th:text="${wagon.getId}"></td>
-            <td><input th:value="${wagon.getWagonType}" type="text"></td>
-            <td><input th:value="${wagon.getLoadingPercentage}" type="number"></td>
-            <td><input th:value="${wagon.getSerialNumber}" type="number"></td>
-            <td><input th:value="${wagon.getHomeStation}" type="text"></td>
-            <td><input th:value="${wagon.getLoadCapacity}" type="number"></td>
-            <td><input th:value="${wagon.getYearOfRelease()}" type="number" ></td>
+            <td><input th:value="${wagon.getWagonType}" type="text" name="wagonType"></td>
+            <td><input th:value="${wagon.getLoadingPercentage}" type="number" name="loadingPercentage"></td>
+            <td><input th:value="${wagon.getSerialNumber}" type="number" name="serialNumber"></td>
+            <td><input th:value="${wagon.getHomeStation}" type="text" name="homeStation"></td>
+            <td><input th:value="${wagon.getLoadCapacity}" type="number" name="loadCapacity"></td>
+            <td><input th:value="${wagon.getYearOfRelease}" type="number" name="yearOfRelease"></td>
             <td>
                 <button type="submit">✅</button>
             </td>

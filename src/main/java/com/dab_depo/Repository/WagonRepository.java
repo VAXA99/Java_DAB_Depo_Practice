@@ -16,12 +16,19 @@ public class WagonRepository implements IWagonRepository {
 
     private List<Wagon> wagons = new ArrayList<>();
     String FILE_PATH = "src/main/resources/XMLfiles/data.xml";
+    private int nextId = 1;
 
     public WagonRepository() {
         try {
             // Parse data from XML file using JacksonXML
             XmlMapper xmlMapper = new XmlMapper();
             wagons = xmlMapper.readValue(new File(FILE_PATH), new TypeReference<List<Wagon>>() {});
+            // Get the next ID to use
+            for (Wagon wagon : wagons) {
+                if (wagon.getId() >= nextId) {
+                    nextId = wagon.getId() + 1;
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,6 +51,8 @@ public class WagonRepository implements IWagonRepository {
 
     @Async
     public void add(Wagon wagon) {
+        // Set the ID of the new wagon
+        wagon.setId(nextId++);
         wagons.add(wagon);
         saveData();
     }

@@ -5,10 +5,7 @@ import com.dab_depo.Service.WagonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,25 +24,47 @@ public class WagonController {
         return "wagons";
     }
 
-    @GetMapping("/delete/{wagonId}")
-    public String deleteWagon(@PathVariable Integer wagonId) {
-        wagonService.delete(wagonId);
+    @GetMapping("/delete/{id}")
+    public String deleteWagon(@PathVariable Integer id) {
+        wagonService.delete(id);
         return "redirect:/wagons";
     }
 
-    @GetMapping("/edit/{wagonId}")
-    public String editWagonById(@PathVariable Integer wagonId, Model model) {
+    @GetMapping("/edit/{id}")
+    public String editWagonById(@PathVariable Integer id, Model model) {
         List<Wagon> wagon = new ArrayList<>();
-        wagon.add(wagonService.findWagonById(wagonId));
+        wagon.add(wagonService.findWagonById(id));
         model.addAttribute("wagon", wagon);
         return "edit_wagon";
     }
 
-    @PostMapping("/edit")
-    public String editWagon(@ModelAttribute Wagon wagon)throws IOException {
+    @PostMapping("/edit/{id}")
+    public String editWagon(@PathVariable Integer id,
+                            @RequestParam(value = "wagonType") String wagonType,
+                            @RequestParam(value = "loadingPercentage") Integer loadingPercentage,
+                            @RequestParam(value = "serialNumber") String serialNumber,
+                            @RequestParam(value = "homeStation") String homeStation,
+                            @RequestParam(value = "loadCapacity") Integer loadCapacity,
+                            @RequestParam(value = "yearOfRelease") Integer yearOfRelease) {
+        Wagon wagon = new Wagon(id, wagonType, loadingPercentage, serialNumber, homeStation, loadCapacity, yearOfRelease);
         wagonService.update(wagon);
         return "redirect:/wagons";
     }
 
+    @GetMapping("/add")
+    public String getAddWagonPage() {
+        return "add_wagon";
+    }
+    @PostMapping("/add")
+    public String addWagon( @RequestParam(value = "wagonType") String wagonType,
+                            @RequestParam(value = "loadingPercentage") Integer loadingPercentage,
+                            @RequestParam(value = "serialNumber") String serialNumber,
+                            @RequestParam(value = "homeStation") String homeStation,
+                            @RequestParam(value = "loadCapacity") Integer loadCapacity,
+                            @RequestParam(value = "yearOfRelease") Integer yearOfRelease) {
+        Wagon wagon = new Wagon(wagonType, loadingPercentage, serialNumber, homeStation, loadCapacity, yearOfRelease);
+        wagonService.add(wagon);
+        return "redirect:/wagons";
+    }
 }
 
