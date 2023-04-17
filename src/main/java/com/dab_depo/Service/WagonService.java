@@ -39,4 +39,33 @@ public class WagonService implements IWagonService {
     public void delete(Integer id) {
         wagonRepository.delete(id);
     }
+
+    @Async
+    public void uploadWagon(Integer wagon_id, Integer increaseLoadingPercentage) {
+        Wagon wagon = wagonRepository.findWagonById(wagon_id);
+        if (wagon != null) {
+            Integer currentLoadingPercentage = wagon.getLoadingPercentage();
+            Integer newLoadingPercentage = currentLoadingPercentage + increaseLoadingPercentage;
+            if (newLoadingPercentage >  100) {
+                newLoadingPercentage = 100;
+            }
+            wagon.setLoadingPercentage(newLoadingPercentage);
+            update(wagon);
+        }
+
+    }
+
+    @Async
+    public void unloadWagon(Integer wagon_id, Integer decreaseLoadingPercentage) {
+        Wagon wagon = wagonRepository.findWagonById(wagon_id);
+        if (wagon != null) {
+            Integer currentLoadingPercentage = wagon.getLoadingPercentage();
+            Integer newLoadingPercentage = currentLoadingPercentage - decreaseLoadingPercentage;
+            if (newLoadingPercentage < 0) {
+                newLoadingPercentage = 0;
+            }
+            wagon.setLoadingPercentage(newLoadingPercentage);
+            update(wagon);
+        }
+    }
 }

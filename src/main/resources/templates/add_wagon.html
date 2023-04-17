@@ -1,33 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Add Wagon</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400i|Open+Sans:700|Raleway:300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"  type="text/css" href="/styles/wagons.css">
+    <title>Add Wagon</title>
 </head>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            DabDepo
+        </div>
+        <nav class="nav">
+            <a href="/" class="nav-link">Главная</a>
+            <a href="/wagons" class="nav-link">Вагоны</a>
+        </nav>
+    </div>
+</header>
+
 <body>
-<h1>Add Wagon</h1>
-
-<form action="/add" method="POST">
-    <label for="wagonType">Wagon Type:</label>
-    <input type="text" id="wagonType" name="wagonType" required>
-
-    <label for="loadingPercentage">Loading Percentage:</label>
-    <input type="number" id="loadingPercentage" name="loadingPercentage" required>
-
-    <label for="serialNumber">Serial Number:</label>
-    <input type="text" id="serialNumber" name="serialNumber" required>
-
-    <label for="homeStation">Home Station:</label>
-    <input type="text" id="homeStation" name="homeStation" required>
-
-    <label for="loadCapacity">Load Capacity:</label>
-    <input type="number" id="loadCapacity" name="loadCapacity" required>
-
-    <label for="yearOfRelease">Year of Release:</label>
-    <input type="number" id="yearOfRelease" name="yearOfRelease" required>
-
-    <input type="submit" value="Add">
+<form class="edit-wagon-form" th:action="@{/add}" method="post">
+    <table class="wagons-table">
+        <thead>
+        <tr>
+            <th class="table-header">Тип</th>
+            <th class="table-header">Процент загрузки</th>
+            <th class="table-header">Серийный номер</th>
+            <th class="table-header">Станция приписки</th>
+            <th class="table-header">Грузоподъемность</th>
+            <th class="table-header">Год выпуска</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="table-data"><input type="text" name="wagonType" required></td>
+            <td class="table-data"><input type="number" name="loadingPercentage" required></td>
+            <td class="table-data"><input type="number" name="serialNumber" required></td>
+            <td class="table-data"><input type="text" name="homeStation" required></td>
+            <td class="table-data"><input type="number" name="loadCapacity" required></td>
+            <td class="table-data"><input type="number" name="yearOfRelease" required></td>
+            <td class="table-change">
+                <button type="submit">Добавить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </form>
 </body>
 </html>

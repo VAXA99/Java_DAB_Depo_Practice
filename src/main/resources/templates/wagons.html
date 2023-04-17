@@ -1,49 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400i|Open+Sans:700|Raleway:300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"  type="text/css" href="/styles/wagons.css">
     <title>Wagons List</title>
 </head>
 
-<!-- HEADER -->
-<header>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/wagons">Wagons</a>
-        <a href="#">About us</a>
-    </nav>
+<!-- Header -->
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            DabDepo
+        </div>
+        <nav class="nav">
+            <a href="/" class="nav-link">Главная</a>
+            <a href="/wagons" class="nav-link">Вагоны</a>
+        </nav>
+    </div>
 </header>
 
 <body>
-<h1>Wagons List</h1>
-<a th:href="@{/add}">➕</a>
-<table>
+<table class="wagons-table">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Type</th>
-        <th>Loading Percentage</th>
-        <th>Serial Number</th>
-        <th>Home Station</th>
-        <th>Load Capacity</th>
-        <th>Year of Release</th>
+        <th class="table-header">ID</th>
+        <th class="table-header">Тип</th>
+        <th class="table-header">Процент загрузки</th>
+        <th class="table-header">Серийный номер</th>
+        <th class="table-header">Станция приписки</th>
+        <th class="table-header">Грузопододъемность</th>
+        <th class="table-header">Год выпуска</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="wagon : ${wagons}">
-        <td th:text="${wagon.id}"></td>
-        <td th:text="${wagon.wagonType}"></td>
-        <td th:text="${wagon.loadingPercentage}"></td>
-        <td th:text="${wagon.serialNumber}"></td>
-        <td th:text="${wagon.homeStation}"></td>
-        <td th:text="${wagon.loadCapacity}"></td>
-        <td th:text="${wagon.yearOfRelease}"></td>
-        <td>
-            <a th:href="@{/edit/{id} (id =${wagon.getId()})}">✏️</a>
-            <a th:href="@{/delete/{id} (id =${wagon.getId()})}">❌</a>
+    <tr th:each="wagon : ${wagons}" class="wagon-row">
+        <td th:text="${wagon.id}" class="table-data"></td>
+        <td th:text="${wagon.wagonType}" class="table-data"></td>
+        <td th:text="${wagon.loadingPercentage}" class="table-data"></td>
+        <td th:text="${wagon.serialNumber}" class="table-data"></td>
+        <td th:text="${wagon.homeStation}" class="table-data"></td>
+        <td th:text="${wagon.loadCapacity}" class="table-data"></td>
+        <td th:text="${wagon.yearOfRelease}" class="table-data"></td>
+        <td class="table-change">
+            <a th:href="@{/edit/{id} (id =${wagon.getId()})}" class="edit-btn">✏️</a>
+            <a th:href="@{/delete/{id} (id =${wagon.getId()})}" class="delete-btn">❌</a>
         </td>
     </tr>
     </tbody>
 </table>
+<a th:href="@{/add}" class="add-btn">Добавить</a>
 </body>
 </html>

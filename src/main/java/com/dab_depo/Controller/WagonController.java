@@ -66,5 +66,7 @@ public class WagonController {
         wagonService.add(wagon);
         return "redirect:/wagons";
     }
+
+
 }
 

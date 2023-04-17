@@ -1,45 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400i|Open+Sans:700|Raleway:300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"  type="text/css" href="/styles/wagons.css">
     <title>Wagons List</title>
 </head>
 
-<!-- HEADER -->
-<header>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/wagons">Wagons</a>
-        <a href="#">About us</a>
-    </nav>
+<!-- Header -->
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            DabDepo
+        </div>
+        <nav class="nav">
+            <a href="/" class="nav-link">Главная</a>
+            <a href="/wagons" class="nav-link">Вагоны</a>
+        </nav>
+    </div>
 </header>
-
 <body>
-<h1>Wagons List</h1>
-<table>
+<table class="wagons-table">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Type</th>
-        <th>Loading Percentage</th>
-        <th>Serial Number</th>
-        <th>Home Station</th>
-        <th>Load Capacity</th>
-        <th>Year of Release</th>
-        <th></th>
+        <th class="table-header">ID</th>
+        <th class="table-header">Тип</th>
+        <th class="table-header">Процент загрузки</th>
+        <th class="table-header">Серийный номер</th>
+        <th class="table-header">Станция приписки</th>
+        <th class="table-header">Грузопододъемность</th>
+        <th class="table-header">Год выпуска</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="wagon: ${wagon}">
+    <tr th:each="wagon: ${wagon}" class="wagon-row">
         <form th:action="'/edit/' + ${wagon.getId}" method="post">
-            <td th:text="${wagon.getId}"></td>
-            <td><input th:value="${wagon.getWagonType}" type="text" name="wagonType"></td>
-            <td><input th:value="${wagon.getLoadingPercentage}" type="number" name="loadingPercentage"></td>
-            <td><input th:value="${wagon.getSerialNumber}" type="number" name="serialNumber"></td>
-            <td><input th:value="${wagon.getHomeStation}" type="text" name="homeStation"></td>
-            <td><input th:value="${wagon.getLoadCapacity}" type="number" name="loadCapacity"></td>
-            <td><input th:value="${wagon.getYearOfRelease}" type="number" name="yearOfRelease"></td>
-            <td>
+            <td th:text="${wagon.getId}" class="table-data"></td>
+            <td class="table-data"><input th:value="${wagon.getWagonType}" type="text" name="wagonType"></td>
+            <td class="table-data"><input th:value="${wagon.getLoadingPercentage}" type="text" name="loadingPercentage"></td>
+            <td class="table-data"><input th:value="${wagon.getSerialNumber}" type="number" name="serialNumber"></td>
+            <td class="table-data"><input th:value="${wagon.getHomeStation}" type="text" name="homeStation"></td>
+            <td class="table-data"><input th:value="${wagon.getLoadCapacity}" type="number" name="loadCapacity"></td>
+            <td class="table-data"><input th:value="${wagon.getYearOfRelease}" type="number" name="yearOfRelease"></td>
+            <td class="table-change">
                 <button type="submit">✅</button>
             </td>
         </form>
