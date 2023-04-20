@@ -10,8 +10,7 @@ public interface IWagonService {
     public void add(Wagon wagon);
     public void update(Wagon wagon);
     public void delete(Integer id);
-    public void uploadWagon(Integer wagon_id, Integer increaseLoadingPercentage);
-    public void unloadWagon(Integer wagon_id, Integer decreaseLoadingPercentage);
+    public void changeStatus(Integer id);
 
 }
 

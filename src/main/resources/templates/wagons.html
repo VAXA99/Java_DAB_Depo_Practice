@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Cardo:400i|Open+Sans:700|Raleway:300,400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet"  type="text/css" href="/styles/wagons.css">
+    <script src="/static/script.js"></script>
     <title>Wagons List</title>
 </head>
 
@@ -31,6 +32,7 @@
         <th class="table-header">Станция приписки</th>
         <th class="table-header">Грузопододъемность</th>
         <th class="table-header">Год выпуска</th>
+        <th class="table-header">Статус</th>
     </tr>
     </thead>
     <tbody>
@@ -42,7 +44,9 @@
         <td th:text="${wagon.homeStation}" class="table-data"></td>
         <td th:text="${wagon.loadCapacity}" class="table-data"></td>
         <td th:text="${wagon.yearOfRelease}" class="table-data"></td>
+        <td th:text="${wagon.isServicable}" class="table-data"></td>
         <td class="table-change">
+        <a th:href="@{/wagons/changeStatus/{id}(id=${wagon.getId})}" class="edit-btn">🔄</a>
             <a th:href="@{/edit/{id} (id =${wagon.getId()})}" class="edit-btn">✏️</a>
             <a th:href="@{/delete/{id} (id =${wagon.getId()})}" class="delete-btn">❌</a>
         </td>

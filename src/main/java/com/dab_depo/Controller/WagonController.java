@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class WagonController {
                             @RequestParam(value = "serialNumber") String serialNumber,
                             @RequestParam(value = "homeStation") String homeStation,
                             @RequestParam(value = "loadCapacity") Integer loadCapacity,
-                            @RequestParam(value = "yearOfRelease") Integer yearOfRelease) {
+                            @RequestParam(value = "yearOfRelease") Integer yearOfRelease){
         Wagon wagon = new Wagon(id, wagonType, loadingPercentage, serialNumber, homeStation, loadCapacity, yearOfRelease);
         wagonService.update(wagon);
         return "redirect:/wagons";
@@ -55,6 +54,7 @@ public class WagonController {
     public String getAddWagonPage() {
         return "add_wagon";
     }
+
     @PostMapping("/add")
     public String addWagon( @RequestParam(value = "wagonType") String wagonType,
                             @RequestParam(value = "loadingPercentage") Integer loadingPercentage,
@@ -67,6 +67,11 @@ public class WagonController {
         return "redirect:/wagons";
     }
 
+    @GetMapping("wagons/changeStatus/{id}")
+    public String changeStatus(@PathVariable Integer id){
+        wagonService.changeStatus(id);
+        return "redirect:/wagons";
+    }   
 
 }
 

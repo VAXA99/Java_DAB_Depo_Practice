@@ -27,7 +27,21 @@ public class Wagon {
     @JacksonXmlProperty(localName = "year_of_release")
     private Integer yearOfRelease;
 
+    @JacksonXmlProperty(localName = "is_servicable")
+    private Boolean isServicable;
+
     public Wagon() {
+    }
+
+    public Wagon(String wagonType, Integer loadingPercentage, String serialNumber, String homeStation, Integer loadCapacity, Integer yearOfRelease) {
+        this.wagonType = wagonType;
+        this.loadingPercentage = loadingPercentage;
+        this.serialNumber = serialNumber;
+        this.homeStation = homeStation;
+        this.loadCapacity = loadCapacity;
+        this.yearOfRelease = yearOfRelease;
+        this.isServicable = Boolean.TRUE;
+
     }
 
     public Wagon(Integer id, String wagonType, Integer loadingPercentage, String serialNumber, String homeStation, Integer loadCapacity, Integer yearOfRelease) {
@@ -38,15 +52,18 @@ public class Wagon {
         this.homeStation = homeStation;
         this.loadCapacity = loadCapacity;
         this.yearOfRelease = yearOfRelease;
+        this.isServicable = Boolean.TRUE;
     }
 
-    public Wagon(String wagonType, Integer loadingPercentage, String serialNumber, String homeStation, Integer loadCapacity, Integer yearOfRelease) {
+    public Wagon(Integer id, String wagonType, Integer loadingPercentage, String serialNumber, String homeStation, Integer loadCapacity, Integer yearOfRelease, Boolean isServicable) {
+        this.id = id;
         this.wagonType = wagonType;
         this.loadingPercentage = loadingPercentage;
         this.serialNumber = serialNumber;
         this.homeStation = homeStation;
         this.loadCapacity = loadCapacity;
         this.yearOfRelease = yearOfRelease;
+        this.isServicable = isServicable;
     }
 
     public Integer getId() {
@@ -105,6 +122,14 @@ public class Wagon {
         this.yearOfRelease = yearOfRelease;
     }
 
+    public Boolean getIsServicable() {
+        return isServicable;
+    }
+
+    public void setIsServicable(Boolean servicable) {
+        isServicable = servicable;
+    }
+
     @Override
     public String toString() {
         return "Wagon{" +
@@ -115,6 +140,7 @@ public class Wagon {
                 ", homeStation='" + homeStation + '\'' +
                 ", loadCapacity=" + loadCapacity +
                 ", yearOfRelease=" + yearOfRelease +
+                ", isServicable=" + isServicable +
                 '}';
     }
 }
