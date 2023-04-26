@@ -16,6 +16,11 @@ public class WagonController {
     @Autowired
     private WagonService wagonService;
 
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
     @GetMapping("/wagons")
     public String listWagons(Model model) {
         List<Wagon> wagons = wagonService.getWagons();
