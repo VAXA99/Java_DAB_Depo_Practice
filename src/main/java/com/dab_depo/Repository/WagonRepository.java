@@ -50,22 +50,24 @@ public class WagonRepository implements IWagonRepository {
     }
 
     @Async
-    public void add(Wagon wagon) {
+    public Wagon add(Wagon wagon) {
         // Set the ID of the new wagon
         wagon.setId(nextId++);
         wagons.add(wagon);
         saveData();
+        return wagon;
     }
 
     @Async
-    public void update(Wagon wagon) {
+    public Wagon update(Wagon wagon) {
         for (int i = 0; i < wagons.size(); i++) {
             if (wagons.get(i).getId().equals(wagon.getId())) {
                 wagons.set(i, wagon);
                 saveData();
-                return;
+                return wagon;
             }
         }
+        return null;
     }
 
     @Async

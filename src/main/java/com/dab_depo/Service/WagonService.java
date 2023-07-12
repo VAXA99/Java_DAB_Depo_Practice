@@ -27,25 +27,18 @@ public class WagonService implements IWagonService {
     }
 
     @Async
-    public void add(Wagon wagon) {
-        wagonRepository.add(wagon);
+    public Wagon add(Wagon wagon) {
+        return wagonRepository.add(wagon);
     }
 
     @Async
-    public void update(Wagon wagon) {
-        wagonRepository.update(wagon);
+    public Wagon update(Wagon wagon) {
+        return wagonRepository.update(wagon);
     }
 
     @Async
     public void delete(Integer id) {
         wagonRepository.delete(id);
-    }
-
-    @Async
-    public void changeStatus(Integer id) {
-        Wagon wagon = wagonRepository.findWagonById(id);
-        wagon.setIsServicable(!wagon.getIsServicable());
-        wagonRepository.update(wagon);
     }
 
 }
