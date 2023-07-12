@@ -1,11 +1,42 @@
-import React from 'react';
-import styles from './WagonList.css'
-import Header from "../Header/Header";
+import React, { useState, useEffect } from 'react';
+import styles from './WagonList.css';
+import Header from '../Header/Header';
+import {backend} from "../../backend";
+import {Link} from "react-router-dom";
 
-const WagonList = ({wagons}) => {
+const WagonList = () => {
+    const [wagons, setWagons] = useState([]);
+
+    useEffect(() => {
+        const fetchWagons = async () => {
+            try {
+                const data = await backend.getWagons();
+                setWagons(data);
+            } catch (error) {
+                console.error('Error fetching wagons:', error);
+            }
+        };
+
+        fetchWagons();
+    }, []);
+
+    const handleDelete = async (id) => {
+        try {
+            await backend.deleteWagon(id);
+            setWagons((prevWagons) => prevWagons.filter((wagon) => wagon.id !== id));
+        } catch (error) {
+            console.error(`Error deleting wagon with ID ${id}:`, error);
+        }
+    };
+
+    const handleUpdate = (id) => {
+        // Handle update logic, e.g., navigate to the edit page or show a modal
+        console.log(`Update wagon with ID ${id}`);
+    };
+
     return (
         <>
-            <Header/>
+            <Header />
             <table className="wagons-table">
                 <thead>
                 <tr>
@@ -16,7 +47,7 @@ const WagonList = ({wagons}) => {
                     <th className="table-header">Станция приписки</th>
                     <th className="table-header">Грузопододъемность</th>
                     <th className="table-header">Год выпуска</th>
-                    <th className="table-header">Исправность</th>
+                    <th className="table-header">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,11 +60,9 @@ const WagonList = ({wagons}) => {
                         <td className="table-data">{wagon.homeStation}</td>
                         <td className="table-data">{wagon.loadCapacity}</td>
                         <td className="table-data">{wagon.yearOfRelease}</td>
-                        <td className="table-data">{wagon.isServicable}</td>
                         <td className="table-change">
-                            <a href={`/wagons/changeStatus/${wagon.id}`} className="edit-btn">🔄</a>
-                            <a href={`/edit/${wagon.id}`} className="edit-btn">✏️</a>
-                            <a href={`/delete/${wagon.id}`} className="delete-btn">❌</a>
+                            <button onClick={() => handleUpdate(wagon.id)}>✏️</button>
+                            <button onClick={() => handleDelete(wagon.id)}>❌</button>
                         </td>
                     </tr>
                 ))}
@@ -41,6 +70,6 @@ const WagonList = ({wagons}) => {
             </table>
         </>
     );
-}
+};
 
 export default WagonList;

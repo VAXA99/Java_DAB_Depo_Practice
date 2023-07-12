@@ -1,12 +1,27 @@
 import React from 'react';
 import styles from './EditWagonForm.css';
-import Header from "../Header/Header";
+import Header from '../Header/Header';
+import {backend} from "../../backend";
 
-const EditWagonForm = ({wagon}) => {
+const EditWagonForm = ({ wagon }) => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            await backend.updateWagon(wagon.id, formData);
+            // Handle success, e.g., show a success message or redirect
+        } catch (error) {
+            // Handle error, e.g., display an error message
+            console.error('Error updating wagon:', error);
+        }
+    };
+
     return (
         <>
-            <Header/>
-            <form action={`/edit/${wagon.id}`} method="post">
+            <Header />
+            <form onSubmit={handleSubmit}>
                 <table className="wagons-table">
                     <thead>
                     <tr>
@@ -47,6 +62,15 @@ const EditWagonForm = ({wagon}) => {
             </form>
         </>
     );
-}
+};
 
 export default EditWagonForm;
+
+
+
+
+
+
+
+
+

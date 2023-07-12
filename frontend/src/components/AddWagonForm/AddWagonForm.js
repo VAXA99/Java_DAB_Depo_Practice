@@ -1,12 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './AddWagonForm.css';
-import Header from "../Header/Header";
+import Header from '../Header/Header';
+import {backend} from "../../backend";
 
 const AddWagonForm = () => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            await backend.addWagon(formData);
+        } catch (error) {
+            console.error('Error adding wagon:', error);
+        }
+    };
+
     return (
         <>
             <Header/>
-            <form className="edit-wagon-form" action="/add" method="post">
+            <form className="edit-wagon-form" onSubmit={handleSubmit}>
                 <table className="wagons-table">
                     <thead>
                     <tr>
@@ -35,6 +48,21 @@ const AddWagonForm = () => {
             </form>
         </>
     );
-}
+};
 
 export default AddWagonForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
