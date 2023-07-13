@@ -7,14 +7,24 @@ const AddWagonForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = event.target;
-        const formData = new FormData(form);
+        const wagon = {
+            wagonType: form.wagonType.value,
+            loadingPercentage: parseInt(form.loadingPercentage.value),
+            serialNumber: parseInt(form.serialNumber.value),
+            homeStation: form.homeStation.value,
+            loadCapacity: parseInt(form.loadCapacity.value),
+            yearOfRelease: parseInt(form.yearOfRelease.value),
+        };
 
         try {
-            await backend.addWagon(formData);
+            await backend.addWagon(wagon);
+            window.location.href = '/wagons';
         } catch (error) {
             console.error('Error adding wagon:', error);
         }
     };
+
+
 
     return (
         <>

@@ -7,13 +7,19 @@ const EditWagonForm = ({ wagon }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = event.target;
-        const formData = new FormData(form);
+        const updatedWagon = {
+            wagonType: form.wagonType.value,
+            loadingPercentage: parseInt(form.loadingPercentage.value),
+            serialNumber: parseInt(form.serialNumber.value),
+            homeStation: form.homeStation.value,
+            loadCapacity: parseInt(form.loadCapacity.value),
+            yearOfRelease: parseInt(form.yearOfRelease.value),
+        };
 
         try {
-            await backend.updateWagon(wagon.id, formData);
-            // Handle success, e.g., show a success message or redirect
+            await backend.updateWagon(wagon.id, updatedWagon);
+            window.location.href = '/wagons';
         } catch (error) {
-            // Handle error, e.g., display an error message
             console.error('Error updating wagon:', error);
         }
     };

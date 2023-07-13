@@ -12,8 +12,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/wagons" element={<WagonList />} />
-                <Route path="/wagons/add" element={<AddWagonForm />} />
-                <Route path="/wagons/edit/:id" element={<EditWagonForm />} />
+                <Route path="/add" element={<AddWagonForm />} />
+                <Route path="/edit/:id" element={<EditWagonForm />} />
             </Routes>
         </BrowserRouter>
     );

@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styles from './WagonList.css';
 import Header from '../Header/Header';
-import {backend} from "../../backend";
-import {Link} from "react-router-dom";
+import { backend } from '../../backend';
+import { Link, useNavigate } from 'react-router-dom';
+import EditWagonForm from "../EditWagonFrom/EditWagonForm";
 
 const WagonList = () => {
     const [wagons, setWagons] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchWagons = async () => {
-            try {
-                const data = await backend.getWagons();
-                setWagons(data);
-            } catch (error) {
-                console.error('Error fetching wagons:', error);
-            }
-        };
-
         fetchWagons();
     }, []);
+
+    const fetchWagons = async () => {
+        try {
+            const data = await backend.getWagons();
+            setWagons(data);
+        } catch (error) {
+            console.error('Error fetching wagons:', error);
+        }
+    };
 
     const handleDelete = async (id) => {
         try {
@@ -29,14 +31,22 @@ const WagonList = () => {
         }
     };
 
-    const handleUpdate = (id) => {
-        // Handle update logic, e.g., navigate to the edit page or show a modal
-        console.log(`Update wagon with ID ${id}`);
+    const handleUpdate = async (id) => {
+        try {
+            const wagon = await backend.getWagonById(id);
+            if (wagon) {
+                navigate(`/edit/${id}`, { state: { wagon } });
+            } else {
+                console.error(`Wagon with ID ${id} not found.`);
+            }
+        } catch (error) {
+            console.error(`Error updating wagon with ID ${id}:`, error);
+        }
     };
 
     return (
         <>
-            <Header />
+            <Header/>
             <table className="wagons-table">
                 <thead>
                 <tr>
@@ -68,6 +78,9 @@ const WagonList = () => {
                 ))}
                 </tbody>
             </table>
+            <Link to="/add" className="add-btn">
+                Добавить
+            </Link>
         </>
     );
 };

@@ -1,6 +1,10 @@
 package com.dab_depo.Controller;
 
 import com.dab_depo.Entity.Wagon;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import com.dab_depo.Service.WagonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +24,9 @@ public class WagonController {
     }
 
     @PostMapping("add")
-    public Wagon addWagon(@RequestBody Wagon wagon) {
-        return wagonService.add(wagon);
+    public ResponseEntity<Wagon> addWagon(@RequestBody Wagon wagon) {
+        Wagon addNewWagon = wagonService.add(wagon);
+        return ResponseEntity.ok(addNewWagon);
     }
 
     @GetMapping("wagon/{id}")
